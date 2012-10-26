@@ -21,8 +21,12 @@ void BinaryTree::insert(int num) {
 	}
 }
 
+void BinaryTree::delete(int num) {
+	
+}
+
 void BinaryTree::insertNode(Node * leaf, int num) {
-	Node * p;
+	Node * p = new Node;
 	p->num = num;
 	p->left = NULL;
 	p->right = NULL;
@@ -49,3 +53,52 @@ void BinaryTree::PreTrav(Node * root) {
 		BinaryTree::PreTrav(p->right);
 	}
 }
+
+void BinaryTree::InTrav(Node * root) {
+	Node * p = root;
+	if (p != NULL) {
+		BinaryTree::InTrav(p->left);
+		cout << p->num << " ";
+		BinaryTree::InTrav(p->right);
+	}
+}
+
+void BinaryTree::PostTrav(Node * root) {
+	Node * p = root;
+	if (p != NULL) {
+		BinaryTree::PostTrav(p->left);
+		BinaryTree::PostTrav(p->right);
+		cout << p->num << " ";
+
+	}
+}
+
+int BinaryTree::nodeCount(Node * root) {
+	Node * p = root;
+	if (p == NULL) {
+		return 0;
+	}
+	else {
+		int count;
+		count = 1;
+		count += BinaryTree::nodeCount(p->left);
+		count += BinaryTree::nodeCount(p->right);
+		return count;
+	}
+
+}
+
+void BinaryTree::childrenCount(Node * root) {
+	Node * p = root;
+	int children;
+
+	if (p != NULL) {
+		children = 0;
+		if (p->left != NULL) { children += 1; }
+		if (p->right != NULL) { children += 1; }
+		cout << "Node with data " << p->num << " has " << children << " child nodes." << endl;
+		BinaryTree::childrenCount(p->left);
+		BinaryTree::childrenCount(p->right);
+	}
+}
+

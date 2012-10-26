@@ -7,11 +7,17 @@ struct Node {
 class BinaryTree {
 public:
 	BinaryTree();
-	~BinaryTree() {};
-	void insert(int num);
-	void PreTrav(Node * node);
+	~BinaryTree() {};	
+
+	void insert(int);
+	void delete(int);
+	void PreTrav(Node *);
+	void InTrav(Node *);
+	void PostTrav(Node *);
+	int nodeCount(Node *);
+	void childrenCount(Node *);
 	
-private:
-	void insertNode(Node * leaf, int num);
 	Node * root;
+private:
+	void insertNode(Node *, int);
 };
