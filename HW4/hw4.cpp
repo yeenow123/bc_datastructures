@@ -10,7 +10,9 @@ int main() {
 	BTree.insert(6);
 	BTree.insert(7);
 	BTree.insert(2);
+	BTree.insert(6);
+
 
 	BTree.PostTrav(BTree.root);
-	BTree.childrenCount(BTree.root);
+	BTree.deleteNode(BTree.root, 2);
 }

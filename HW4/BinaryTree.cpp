@@ -21,7 +21,23 @@ void BinaryTree::insert(int num) {
 	}
 }
 
-void BinaryTree::delete(int num) {
+void BinaryTree::deleteNode(Node * root, int num) {
+	Node * p = root;
+	Node * q;
+
+	if (num == p->num) {
+		if (p->left == NULL && p->right == NULL) delete p;
+		else if ()
+	}
+	else if (num < p->num) {
+		if (p->left == NULL)  cout << num << " is not in the tree.";
+		else BinaryTree::deleteNode(p->left, num); 
+	}
+	else if (num > p->num) {
+		if (p->right == NULL) cout << num << " is not in the tree.";
+		else BinaryTree::deleteNode(p->right, num);
+	}
+		
 	
 }
 
@@ -31,7 +47,9 @@ void BinaryTree::insertNode(Node * leaf, int num) {
 	p->left = NULL;
 	p->right = NULL;
 
-	if (num <= leaf->num) {
+	if (num == leaf->num) cout << num << " is a duplicate value." << endl;
+
+	else if (num < leaf->num) {
 		if (leaf->left != NULL)
 			BinaryTree::insertNode(leaf->left, num);
 		else
