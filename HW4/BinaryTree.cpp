@@ -21,24 +21,82 @@ void BinaryTree::insert(int num) {
 	}
 }
 
-void BinaryTree::deleteNode(Node * root, int num) {
-	Node * p = root;
-	Node * q;
+void BinaryTree::remove(int num) {
+	Node * c;
+	Node * tc;
+	bool found = false;
 
-	if (num == p->num) {
-		if (p->left == NULL && p->right == NULL) delete p;
-		else if ()
+	if (root == NULL)
+		cout << "The tree is empty." << endl;
+	else {
+		c = root;
+		tc = root;
+
+		while (c != NULL && !found) { // Look for the number in tree
+			if (c->num == num)
+				found = true;
+			else {
+				tc = c;
+				if (c->num > num)
+					c = c->left;
+				else
+					c = c->right;
+			}
+		}
+
+		if (c == NULL)
+			cout << "The number is not in the tree." << endl;
+		else if (found) {
+			if (c == root)
+				removeNode(root);
+			else if (tc->num > num)
+				removeNode(tc->left);
+			else
+				removeNode(tc->right);
+		}
+		else
+			cout << "The number is not in the tree." << endl;
 	}
-	else if (num < p->num) {
-		if (p->left == NULL)  cout << num << " is not in the tree.";
-		else BinaryTree::deleteNode(p->left, num); 
+
+}
+
+void BinaryTree::removeNode(Node *& p) {
+	Node * c;
+	Node * tc;
+	Node * temp;
+
+	if (p == NULL) 
+		cout << "The node chosen to be deleted is NULL." << endl;
+	else if (p->left == NULL && p->right == NULL) { // Node has no children
+		temp = p;
+		p = NULL;
+		delete temp;
 	}
-	else if (num > p->num) {
-		if (p->right == NULL) cout << num << " is not in the tree.";
-		else BinaryTree::deleteNode(p->right, num);
+	else if (p->left == NULL) { // Node has right child
+		temp = p;
+		p = temp->right;
+		delete temp;
 	}
-		
-	
+	else if (p->right == NULL) { // Node has left child
+		temp = p;
+		p = temp->left;
+		delete temp;
+	}
+	else { // Node has two children
+		c = p->left;
+		tc = NULL;
+		while (c->right != NULL) {
+			tc = c;
+			c = c->right;
+		}
+		p->num = c->num;
+
+		if (tc = NULL) p->left = c->left;
+		else tc->right = c->left;
+
+		delete c;
+	}
+
 }
 
 void BinaryTree::insertNode(Node * leaf, int num) {
@@ -51,13 +109,13 @@ void BinaryTree::insertNode(Node * leaf, int num) {
 
 	else if (num < leaf->num) {
 		if (leaf->left != NULL)
-			BinaryTree::insertNode(leaf->left, num);
+			insertNode(leaf->left, num);
 		else
 			leaf->left = p;
 	}
 	else if (num > leaf->num) {
 		if (leaf->right != NULL)
-			BinaryTree::insertNode(leaf->right, num);
+			insertNode(leaf->right, num);
 		else
 			leaf->right = p;
 	}
@@ -67,25 +125,25 @@ void BinaryTree::PreTrav(Node * root) {
 	Node * p = root;
 	if (p != NULL) {
 		cout << p->num << " ";
-		BinaryTree::PreTrav(p->left);
-		BinaryTree::PreTrav(p->right);
+		PreTrav(p->left);
+		PreTrav(p->right);
 	}
 }
 
 void BinaryTree::InTrav(Node * root) {
 	Node * p = root;
 	if (p != NULL) {
-		BinaryTree::InTrav(p->left);
+		InTrav(p->left);
 		cout << p->num << " ";
-		BinaryTree::InTrav(p->right);
+		InTrav(p->right);
 	}
 }
 
 void BinaryTree::PostTrav(Node * root) {
 	Node * p = root;
 	if (p != NULL) {
-		BinaryTree::PostTrav(p->left);
-		BinaryTree::PostTrav(p->right);
+		PostTrav(p->left);
+		PostTrav(p->right);
 		cout << p->num << " ";
 
 	}
@@ -99,8 +157,8 @@ int BinaryTree::nodeCount(Node * root) {
 	else {
 		int count;
 		count = 1;
-		count += BinaryTree::nodeCount(p->left);
-		count += BinaryTree::nodeCount(p->right);
+		count += nodeCount(p->left);
+		count += nodeCount(p->right);
 		return count;
 	}
 
@@ -115,8 +173,8 @@ void BinaryTree::childrenCount(Node * root) {
 		if (p->left != NULL) { children += 1; }
 		if (p->right != NULL) { children += 1; }
 		cout << "Node with data " << p->num << " has " << children << " child nodes." << endl;
-		BinaryTree::childrenCount(p->left);
-		BinaryTree::childrenCount(p->right);
+		childrenCount(p->left);
+		childrenCount(p->right);
 	}
 }
 

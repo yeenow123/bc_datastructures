@@ -10,7 +10,7 @@ public:
 	~BinaryTree() {};	
 
 	void insert(int);
-	void deleteNode(Node *, int);
+	void remove(int);
 	void PreTrav(Node *);
 	void InTrav(Node *);
 	void PostTrav(Node *);
@@ -20,4 +20,5 @@ public:
 	Node * root;
 private:
 	void insertNode(Node *, int);
+	void removeNode(Node *&);
 };
