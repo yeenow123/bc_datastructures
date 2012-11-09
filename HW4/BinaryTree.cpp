@@ -99,7 +99,7 @@ void BinaryTree::removeNode(Node *& p) {
 
 }
 
-void BinaryTree::insertNode(Node * leaf, int num) {
+void BinaryTree::insertNode(Node *& leaf, int num) {
 	Node * p = new Node;
 	p->num = num;
 	p->left = NULL;
@@ -128,6 +128,7 @@ void BinaryTree::PreTrav(Node * root) {
 		PreTrav(p->left);
 		PreTrav(p->right);
 	}
+	
 }
 
 void BinaryTree::InTrav(Node * root) {
@@ -137,6 +138,7 @@ void BinaryTree::InTrav(Node * root) {
 		cout << p->num << " ";
 		InTrav(p->right);
 	}
+	
 }
 
 void BinaryTree::PostTrav(Node * root) {
@@ -145,8 +147,8 @@ void BinaryTree::PostTrav(Node * root) {
 		PostTrav(p->left);
 		PostTrav(p->right);
 		cout << p->num << " ";
-
 	}
+	
 }
 
 int BinaryTree::nodeCount(Node * root) {
@@ -160,7 +162,9 @@ int BinaryTree::nodeCount(Node * root) {
 		count += nodeCount(p->left);
 		count += nodeCount(p->right);
 		return count;
+		cout << "There are " << count << " nodes in the tree." << endl;
 	}
+
 
 }
 
@@ -176,5 +180,15 @@ void BinaryTree::childrenCount(Node * root) {
 		childrenCount(p->left);
 		childrenCount(p->right);
 	}
+}
+
+void BinaryTree::deleteTree(Node * root) {
+	Node * p = root;
+	if (p != NULL) {
+		deleteTree(p->left);
+		deleteTree(p->right);
+		delete p;
+	}
+	
 }
 

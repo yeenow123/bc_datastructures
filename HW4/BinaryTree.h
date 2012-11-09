@@ -16,9 +16,10 @@ public:
 	void PostTrav(Node *);
 	int nodeCount(Node *);
 	void childrenCount(Node *);
+	void deleteTree(Node *);
 	
 	Node * root;
 private:
-	void insertNode(Node *, int);
+	void insertNode(Node *&, int);
 	void removeNode(Node *&);
 };
