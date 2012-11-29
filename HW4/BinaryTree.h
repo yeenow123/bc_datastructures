@@ -9,7 +9,7 @@ public:
 	BinaryTree();
 	~BinaryTree() {};	
 
-	void insert(int);
+	void insert(Node *&, int);
 	void remove(int);
 	void PreTrav(Node *);
 	void InTrav(Node *);
@@ -20,6 +20,6 @@ public:
 	
 	Node * root;
 private:
-	void insertNode(Node *&, int);
+	//void insertNode(Node *&, int);
 	void removeNode(Node *&);
 };

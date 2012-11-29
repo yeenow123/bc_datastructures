@@ -59,75 +59,92 @@ int split(const string &txt, vector<string> &strs, char ch) {
     return strs.size();
 }
 
+BinaryTree treeInitialize(BinaryTree BTree, string line) {
+
+	vector <int> tokens;
+	int i;
+
+	splitNum(line, tokens, ' ');
+
+	for (i=0; i<tokens.size(); i++) {
+		BTree.insert(BTree.root, tokens[i]);
+	}
+
+	BTree.InTrav(BTree.root);
+	cout << endl;
+	BTree.PreTrav(BTree.root);
+	cout << endl;
+	BTree.PostTrav(BTree.root);
+	cout << endl;
+	cout << "The tree has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
+	//BTree.childrenCount(BTree.root);
+	
+	return BTree;
+}
+
+BinaryTree treeChange(BinaryTree BTree, string line) {
+
+	vector <string> strtokens;
+	int i;
+
+	split(line, strtokens, ' ');
+
+	for (i=0; i<strtokens.size(); i+=2) {
+		if (strtokens[i] == "Insert ") {
+			BTree.insert(BTree.root, converter<int>(strtokens[i+1]));
+		}
+		else {
+			BTree.remove(converter<int>(strtokens[i+1]));
+		}
+	}
+
+	cout << "Inserted and deleted nodes." << endl;
+	BTree.InTrav(BTree.root);
+	cout << endl;
+	BTree.PreTrav(BTree.root);
+	cout << endl;
+	BTree.PostTrav(BTree.root);
+	cout << endl;
+	cout << "The tree now has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
+	//BTree.childrenCount(BTree.root);
+	BTree.deleteTree(BTree.root); //fix this fucking delete tree shitttt
+	cout << "Bro";
+	
+	return BTree;
+}
+
 void readFile(string fileName) {
 	ifstream file;
 	string line;
-	vector <int> tokens;
-	vector <string> strtokens;
-	int i;
-	int treeNum;
+	int count = 0;
 
 	file.open(fileName.c_str());
 
-	if (file.is_open()) {
-		treeNum = 1;
+	if (file.is_open()) {		
 		
 		BinaryTree BTree;
+
 		while (getline(file, line)) {
-
-			BinaryTree * tree = &BTree;
-			if (tree == NULL)
-				BinaryTree BTree;
-
-			if (line.find("Insert") == string::npos && line.find("Delete") == string::npos) { //If the line is just initializing the tree
-				splitNum(line, tokens, ' ');
-
-				cout << "Tree #" << treeNum << endl;
-
-				for (i=0; i<tokens.size(); i++) {
-					BTree.insert(tokens[i]);
-				}
-				BTree.InTrav(BTree.root);
-				cout << endl;
-				BTree.PreTrav(BTree.root);
-				cout << endl;
-				BTree.PostTrav(BTree.root);
-				cout << endl;
-				cout << "The tree has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
-				BTree.childrenCount(BTree.root);
-
-				treeNum++;
+			
+			if (count % 2 == 0) {
+				cout << "Tree #" << count / 2 << endl;
+				BTree.root == NULL;
+				BTree = treeInitialize(BTree, line);
 			}
-			else { //If we are inserting or deleting nodes
-				split(line, strtokens, ' ');
+			else if (count % 2 != 0) {
 
-				for (i=0; i<strtokens.size(); i+=2) {
-					
-					if (strtokens[i] == "Insert ") {
-						BTree.insert(converter<int>(strtokens[i+1])); }
-					else if (strtokens[i] == "Delete ")
-						BTree.remove(converter<int>(strtokens[i+1]));
-				}
-				cout << "Inserted and deleted nodes." << endl;
-				BTree.InTrav(BTree.root);
-				cout << endl;
-				BTree.PreTrav(BTree.root);
-				cout << endl;
-				BTree.PostTrav(BTree.root);
-				cout << endl;
-				cout << "The tree now has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
-				BTree.childrenCount(BTree.root);
-				BTree.deleteTree(BTree.root);
-				tree = NULL;
+				BTree = treeChange(BTree, line);
 			}
+			
+			count++;
+
 		}
 	}
 }
 
 
-
 int main() {
 	readFile("hw4Data.txt");
-	
+
 
 }
