@@ -59,7 +59,7 @@ int split(const string &txt, vector<string> &strs, char ch) {
     return strs.size();
 }
 
-BinaryTree treeInitialize(BinaryTree BTree, string line) {
+void treeInitialize(BinaryTree & BTree, string line) {
 
 	vector <int> tokens;
 	int i;
@@ -68,7 +68,9 @@ BinaryTree treeInitialize(BinaryTree BTree, string line) {
 
 	for (i=0; i<tokens.size(); i++) {
 		BTree.insert(BTree.root, tokens[i]);
+
 	}
+
 
 	BTree.InTrav(BTree.root);
 	cout << endl;
@@ -79,10 +81,10 @@ BinaryTree treeInitialize(BinaryTree BTree, string line) {
 	cout << "The tree has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
 	//BTree.childrenCount(BTree.root);
 	
-	return BTree;
+	//return BTree;
 }
 
-BinaryTree treeChange(BinaryTree BTree, string line) {
+void treeChange(BinaryTree & BTree, string line) {
 
 	vector <string> strtokens;
 	int i;
@@ -91,10 +93,12 @@ BinaryTree treeChange(BinaryTree BTree, string line) {
 
 	for (i=0; i<strtokens.size(); i+=2) {
 		if (strtokens[i] == "Insert ") {
+			cout << strtokens[i+1];
 			BTree.insert(BTree.root, converter<int>(strtokens[i+1]));
 		}
 		else {
 			BTree.remove(converter<int>(strtokens[i+1]));
+
 		}
 	}
 
@@ -108,9 +112,8 @@ BinaryTree treeChange(BinaryTree BTree, string line) {
 	cout << "The tree now has " << BTree.nodeCount(BTree.root) << " nodes." << endl;
 	//BTree.childrenCount(BTree.root);
 	BTree.deleteTree(BTree.root); //fix this fucking delete tree shitttt
-	cout << "Bro";
 	
-	return BTree;
+	//return BTree;
 }
 
 void readFile(string fileName) {
@@ -128,12 +131,10 @@ void readFile(string fileName) {
 			
 			if (count % 2 == 0) {
 				cout << "Tree #" << count / 2 << endl;
-				BTree.root == NULL;
-				BTree = treeInitialize(BTree, line);
+				treeInitialize(BTree, line);
 			}
 			else if (count % 2 != 0) {
-
-				BTree = treeChange(BTree, line);
+				treeChange(BTree, line);
 			}
 			
 			count++;

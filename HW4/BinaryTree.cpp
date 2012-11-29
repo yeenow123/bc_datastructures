@@ -37,12 +37,16 @@ void BinaryTree::remove(int num) {
 	if (root == NULL)
 		cout << "The tree is empty." << endl;
 	else {
+
 		c = root;
 		tc = root;
 
+
 		while (c != NULL && !found) { // Look for the number in tree
-			if (c->num == num)
+			if (c->num == num) {
 				found = true;
+				
+			}
 			else {
 				tc = c;
 				if (c->num > num)
@@ -55,12 +59,20 @@ void BinaryTree::remove(int num) {
 		if (c == NULL)
 			cout << "The number is not in the tree." << endl;
 		else if (found) {
-			if (c == root)
-				removeNode(c);
-			else if (tc->num > num)
+
+			if (c == root) {
+				
+				removeNode(c); 
+				root = c;
+			}
+			else if (tc->num > num) {
 				removeNode(tc->left);
-			else
+							
+			}
+			else {
 				removeNode(tc->right);
+				
+			}
 		}
 		else
 			cout << "The number is not in the tree." << endl;
@@ -82,9 +94,11 @@ void BinaryTree::removeNode(Node *& p) {
 
 	}
 	else if (p->left == NULL) { // Node has right child
+
 		temp = p;
 		p = temp->right;
 		delete temp;
+		
 
 	}
 	else if (p->right == NULL) { // Node has left child
@@ -94,16 +108,26 @@ void BinaryTree::removeNode(Node *& p) {
 
 	}
 	else { // Node has two children
+
 		c = p->left;
 		tc = NULL;
+
 		while (c->right != NULL) {
+
 			tc = c;
 			c = c->right;
 		}
+
 		p->num = c->num;
 
-		if (tc = NULL) p->left = c->left;
-		else tc->right = c->left;
+		if (tc == NULL) {
+			
+			p->left = c->left;
+		}
+		else {
+		 	tc->right = c->left;
+		 	
+		}
 
 		delete c;
 
@@ -196,13 +220,14 @@ void BinaryTree::childrenCount(Node * root) {
 	}
 }
 
-void BinaryTree::deleteTree(Node * root) {
-	Node * p = root;
+void BinaryTree::deleteTree(Node * proot) {
+	Node * p = proot;
 	if (p != NULL) {
 		deleteTree(p->left);
 		deleteTree(p->right);
 		delete p;
+		root = NULL;
 	}
-	
+
 }
 
