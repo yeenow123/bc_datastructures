@@ -20,6 +20,5 @@ public:
 	
 	Node * root;
 private:
-	//void insertNode(Node *&, int);
 	void removeNode(Node *&);
 };

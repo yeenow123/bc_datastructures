@@ -135,30 +135,6 @@ void BinaryTree::removeNode(Node *& p) {
 
 }
 
-// void BinaryTree::insertNode(Node *& leaf, int num) {
-// 	Node * p = new Node;
-// 	p->num = num;
-// 	p->left = NULL;
-// 	p->right = NULL;
-
-
-// 	if (num == leaf->num) { cout << num << " is a duplicate value." << endl;
-// 	cout << num << " "; }
-
-// 	else if (num < leaf->num) {
-// 		if (leaf->left != NULL)
-// 			insertNode(leaf->left, num);
-// 		else
-// 			leaf->left = p;
-// 	}
-// 	else if (num > leaf->num) {
-// 		if (leaf->right != NULL)
-// 			insertNode(leaf->right, num);
-// 		else
-// 			leaf->right = p;
-// 	}
-// }
-
 void BinaryTree::PreTrav(Node * root) {
 	Node * p = root;
 	if (p != NULL) {
