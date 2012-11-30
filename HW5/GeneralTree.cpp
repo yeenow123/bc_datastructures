@@ -5,66 +5,89 @@ GeneralTree::GeneralTree() {
 	root = NULL;
 }
 
-void GeneralTree::insert(node *& p, string name, string relation_name) {
-	node * q;
-	node * r;	
+void GeneralTree::insert(node * q, string name, string relation_name) {
+	node * p;
+	node * r;
+	bool found = false;	
 
 	if (root == NULL) {
-		p = new node;
-		p->name = name;
-		p->first = NULL;
-		p->next = NULL;
+		q = new node;
+		q->name = name;
+		q->visited = false;
+		q->first = NULL;
+		q->next = NULL;
+		q->parent = NULL;
+		root = q;
 	}
 	else {
 		
 		r = new node;
 		r->name = name;
+		r->visited = false;
 		r->first = NULL;
 		r->next = NULL;
+		r->parent = NULL;
 		
 		//Implement searching for name/traversal
 
-		if (p != NULL) {
-			//TRY TO GET NON-RECURSIVE WAY TO TRAVERSE
-			cout << relation_name << " ";
-			in_trav(p->first);
+		if (q != NULL) {
+			
+			q = root;
+			
+			//Non-recursive traversal of binary tree with visited boolean and parent node reference
+			while ((q != root && root->visited == false) || !found) {
+				if (q->visited == false) {
 
-			//Found the father
-			if (p->name == relation_name) {
-				
-				if (p->first == NULL) {
+					if (q->name == relation_name) {
+						found = true;
+						if (q->first == NULL) {
+								r->parent = q;
+								q->first = r;	
 
-					p->first = r;
-					
-				}
-				else {
-					q = p->first;
-					while (q->next != NULL) {
-						q = q->next;
-						
+						}
+						else {
+							p = q->first;
+							while (p->next != NULL) {
+								p = p->next;								
+							}
+							r->parent = p;
+							p->next = r;
+						}
+
 					}
-					q->next = r;
+					q->visited = true;
 				}
-				
-			}
+				else if (q->first != NULL && q->first->visited != true) {
+					q->parent = q;
+					q = q->first;
 
-			in_trav(p->next);
+				}
+				else if (q->next != NULL && q->next->visited != true) {
+					q->parent = q;
+					q = q->next;
+						
+				}				
+																
+				else {
+
+					q = q->parent;
+				}
+					
+			}
+			reset_visited(root);
 
 		}
-
-	}	
-	
+	}		
 }
 
-void GeneralTree::in_trav(node * proot) {
+void GeneralTree::reset_visited(node * proot) {
 	node * p = proot;
 
-	if (p != NULL) {
-
-		in_trav(p->first);
-		in_trav(p->next);
+	if (p!= NULL) {
+		reset_visited(p->first);
+		p->visited = false;
+		reset_visited(p->next);
 	}
-	
 }
 
 void GeneralTree::print_in_trav(node * proot) {
@@ -72,9 +95,9 @@ void GeneralTree::print_in_trav(node * proot) {
 
 	if (p != NULL) {
 
-		in_trav(p->first);
+		print_in_trav(p->first);
 		cout << p->name << " ";
-		in_trav(p->next);
+		print_in_trav(p->next);
 	}
 	
 }

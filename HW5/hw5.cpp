@@ -23,10 +23,15 @@ void readFile(string filename) {
 int main() {
 	GeneralTree tree;
 
-	tree.insert(tree.root, "Jones", "Tom");
+	tree.insert(tree.root, "Jones", "");
+	
 	tree.insert(tree.root, "Bob", "Jones");
-	tree.insert(tree.root, "Brian", "Jones");
-	tree.insert(tree.root, "Michael", "Brian");
 
-	//tree.print_in_trav(tree.root);
+	tree.insert(tree.root, "Brian", "Jones");
+	
+	tree.insert(tree.root, "Jay", "Bob");
+
+	tree.insert(tree.root, "Tom", "Brian");
+	cout << tree.root->name;
+	tree.print_in_trav(tree.root);
 }
