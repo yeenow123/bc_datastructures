@@ -20,6 +20,7 @@ public:
 	GeneralTree();
 	void insert(node *, string, string);
 	void print_in_trav(node *);
+	void father_p(string);
 
 private:
 	void reset_visited(node *);

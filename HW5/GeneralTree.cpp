@@ -38,6 +38,7 @@ void GeneralTree::insert(node * q, string name, string relation_name) {
 			while ((q != root && root->visited == false) || !found) {
 				if (q->visited == false) {
 
+					//Check for the father?
 					if (q->name == relation_name) {
 
 						found = true;
@@ -101,4 +102,42 @@ void GeneralTree::print_in_trav(node * proot) {
 		print_in_trav(p->next);
 	}
 	
+}
+
+void GeneralTree::father_p(string name) {
+	node * p;
+	node * q;
+	p = root;
+	q = root;
+	bool found = false;
+
+	while (root->visited == false || !found) {
+		if (p->visited == false) {
+
+			if (p->name == name) {
+
+			
+
+			}
+			p->visited = true;
+		}
+		else if (q->first != NULL && q->first->visited != true) {
+			q = p;		
+			p = p->first;
+
+		}
+		else if (q->next != NULL && q->next->visited != true) {
+			q = p;
+			p = p->next;
+				
+		}				
+														
+		else {
+		
+			p = p->parent;
+		}
+			
+	}
+	reset_visited(root);
+
 }
