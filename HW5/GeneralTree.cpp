@@ -7,7 +7,7 @@ GeneralTree::GeneralTree() {
 
 void GeneralTree::insert(node * q, string name, string relation_name) {
 	node * p;
-	node * r;
+	node * r; //Node to add the tree
 	bool found = false;	
 
 	if (root == NULL) {
@@ -39,9 +39,11 @@ void GeneralTree::insert(node * q, string name, string relation_name) {
 				if (q->visited == false) {
 
 					if (q->name == relation_name) {
+
 						found = true;
 						if (q->first == NULL) {
 								r->parent = q;
+	
 								q->first = r;	
 
 						}
@@ -51,25 +53,24 @@ void GeneralTree::insert(node * q, string name, string relation_name) {
 								p = p->next;								
 							}
 							r->parent = p;
+
 							p->next = r;
 						}
 
 					}
 					q->visited = true;
 				}
-				else if (q->first != NULL && q->first->visited != true) {
-					q->parent = q;
+				else if (q->first != NULL && q->first->visited != true) {		
 					q = q->first;
 
 				}
 				else if (q->next != NULL && q->next->visited != true) {
-					q->parent = q;
 					q = q->next;
 						
 				}				
 																
 				else {
-
+				
 					q = q->parent;
 				}
 					

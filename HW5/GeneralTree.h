@@ -12,7 +12,6 @@ struct node {
 	
 };
 
-
 class GeneralTree {
 public:
 	
