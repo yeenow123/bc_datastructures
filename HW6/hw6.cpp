@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -14,13 +15,23 @@ int * copyarr(int arr[], int size) {
 	return newarr;
 }
 
-void bubblesort(int arr[], int num) {
+int maxNum(int arr[], int num) {
+	int * max = max_element(arr, arr + num);
+	return * max;
+}
+
+int minNum(int arr[], int num) {
+	int * min = min_element(arr, arr + num);
+	return * min;
+}
+
+void bubblesort(int arr[], int num, int & compares, int & swaps) {
 	bool swapped = true;
 	int * newarr = copyarr(arr, num);
 	int j = 0;
 	int tmp;
-	int swaps = 0;
-	int compares = 0;
+	swaps = 0;
+	compares = 0;
 
 	while (swapped) {
 	    swapped = false;
@@ -41,6 +52,7 @@ void bubblesort(int arr[], int num) {
 	for (int i=0; i<num; i++) {
 		cout << newarr[i] << " ";	
 	}
+	cout << endl;
     cout << "Bubblesort had " << compares << " comparisons and " << swaps << " swaps." << endl;
 }
 
@@ -136,9 +148,9 @@ void merge(int * a, int * b, int low, int pivot, int high, int & compares, int &
     
 }
 
-void quicksort_counter(int arr[], int num) {
-	int swaps = 0;
-	int compares = 0;
+void quicksort_counter(int arr[], int num, int & compares, int & swaps) {
+	swaps = 0;
+	compares = 0;
 	int * newarr = copyarr(arr, num);
 
 	quicksort(newarr, 0, num - 1, swaps, compares);
@@ -146,12 +158,14 @@ void quicksort_counter(int arr[], int num) {
 	for (int i=0; i<num; i++) {
 		cout << newarr[i] << " ";	
 	}
+
+	cout << endl;
 	cout << "Quicksort had " << compares << " comparisons and " << swaps << " swaps." << endl;
 }
 
-void mergesort_counter(int arr[], int num) {
-	int swaps = 0;
-	int compares = 0;
+void mergesort_counter(int arr[], int num, int & compares, int & swaps) {
+	swaps = 0;
+	compares = 0;
 	int * newarr = copyarr(arr, num);
 	int y[num];
 
@@ -160,11 +174,19 @@ void mergesort_counter(int arr[], int num) {
 	for (int i=0; i<num; i++) {
 		cout << newarr[i] << " ";	
 	}
+	cout << endl;
 	cout << "Mergesort had " << compares << " comparisons and " << swaps << " swaps." << endl;
 }
 
 void readIn(int x[], int num) {
-	
+	int bubble_swaps = 0;
+	int bubble_compares = 0;
+	int merge_swaps = 0;
+	int merge_compares = 0;
+	int quick_swaps = 0;
+	int quick_compares = 0;
+	int swaparr[3];
+	int comparr[3];
 	//Print out unsorted array
 	for (int i=0; i<num; i++) {
 		cout << x[i] << " ";	
@@ -172,10 +194,20 @@ void readIn(int x[], int num) {
 
 	cout << endl;
 
-	//mergesort_counter(x, num);
-	quicksort_counter(x, num);
-	//bubblesort(x, num);
+	mergesort_counter(x, num, merge_compares, merge_swaps);
+	quicksort_counter(x, num, quick_compares, quick_swaps);
+	bubblesort(x, num, bubble_compares, bubble_swaps);
 
+	swaparr[0] = bubble_swaps;
+	swaparr[1] = quick_swaps;
+	swaparr[2] = merge_swaps;
+
+	comparr[0] = bubble_compares;
+	comparr[1] = quick_compares;
+	comparr[2] = merge_compares;
+
+	cout << "The sort with the most swaps was at " << maxNum(swaparr, 3) << " swaps and the most comparisons was at " << maxNum(comparr, 3) << " comparisons." << endl;
+	cout << "The sort with the least swaps was " << minNum(swaparr, 3) << " swaps and the least comparisons was " << minNum(comparr, 3) << " comparisons." << endl;
 }
 
 int * randomarr(int num) {
@@ -218,44 +250,45 @@ int main() {
 	num = sizeof(a) / sizeof(int);
 	readIn(a, num);
 
-	cout << "Here is a group of 10 random numbers" << endl;
-	num = 10;
-	int * b = randomarr(num);
-	readIn(b, num);
+	// cout << "Here is a group of 10 random numbers" << endl;
+	// num = 10;
+	// int * b = randomarr(num);
+	// readIn(b, num);
 
-	cout << "Here is a group of 10 reverse numbers" << endl;
-	int c[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-	num = sizeof(c) / sizeof(int);
-	readIn(c, num);
+	// cout << "Here is a group of 10 reverse numbers" << endl;
+	// int c[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+	// num = sizeof(c) / sizeof(int);
+	// readIn(c, num);
 
-	cout << "Here is a group of 50 almost sorted numbers" << endl;
-	num = 50;
-	int * d = almostarr(num);
-	readIn(d, num);	
+	// cout << "Here is a group of 50 almost sorted numbers" << endl;
+	// num = 50;
+	// int * d = almostarr(num);
+	// readIn(d, num);	
 
-	cout << "Here is a group of 50 random numbers" << endl;
-	num = 50;
-	int * e = randomarr(num);
-	readIn(e, num);	
+	// cout << "Here is a group of 50 random numbers" << endl;
+	// num = 50;
+	// int * e = randomarr(num);
+	// readIn(e, num);	
 
-	cout << "Here is a group of 50 reverse numbers" << endl;
-	num = 50;
-	int * f = reversearr(num);
-	readIn(f, num);
+	// cout << "Here is a group of 50 reverse numbers" << endl;
+	// num = 50;
+	// int * f = reversearr(num);
+	// readIn(f, num);
 
-	cout << "Here is a group of 50 almost sorted numbers" << endl;
-	num = 100;
-	int * g = almostarr(num);
-	readIn(g, num);	
+	// cout << "Here is a group of 50 almost sorted numbers" << endl;
+	// num = 100;
+	// int * g = almostarr(num);
+	// readIn(g, num);	
 
-	cout << "Here is a group of 100 random numbers" << endl;
-	num = 100;
-	int * h = randomarr(num);
-	readIn(h, num);	
+	// cout << "Here is a group of 100 random numbers" << endl;
+	// num = 100;
+	// int * h = randomarr(num);
+	// readIn(h, num);	
 	
-	cout << "Here is a group of 100 reverse numbers" << endl;
-	num = 100;
-	int * i = reversearr(num);
-	readIn(i, num);
+	// cout << "Here is a group of 100 reverse numbers" << endl;
+	// num = 100;
+	// int * i = reversearr(num);
+	// readIn(i, num);
+
 
 }
