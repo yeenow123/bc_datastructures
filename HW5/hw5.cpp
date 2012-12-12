@@ -52,6 +52,8 @@ void readFile(string filename) {
 		}
 		tree.print_in_trav(tree.root);
 
+		tree.father_p("Jones");
+
 	}
 }
 

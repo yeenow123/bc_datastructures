@@ -100,7 +100,7 @@ void GeneralTree::print_in_trav(node * proot) {
 	if (p != NULL) {
 
 		print_in_trav(p->first);
-		cout << p->name << " ";
+		cout << p->name << endl;
 		print_in_trav(p->next);
 	}
 	
@@ -117,18 +117,28 @@ void GeneralTree::father_p(string name) {
 		if (p->visited == false) {
 
 			if (p->name == name) {
-
+				found = true;
+				node * current = p;
+				node * parent = p->parent;
 			
+				while (parent != NULL && current != parent->first) {
+					current = parent;
+					parent = current->parent;
+				}
 
+				if (parent == NULL) 
+					cout << name << " has no father." << endl;
+				else 
+					cout << name << "'s father is " << parent->name << "." << endl;
 			}
 			p->visited = true;
 		}
-		else if (q->first != NULL && q->first->visited != true) {
+		else if (p->first != NULL && p->first->visited != true) {
 			q = p;		
 			p = p->first;
 
 		}
-		else if (q->next != NULL && q->next->visited != true) {
+		else if (p->next != NULL && p->next->visited != true) {
 			q = p;
 			p = p->next;
 				
