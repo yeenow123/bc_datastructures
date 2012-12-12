@@ -1,10 +1,19 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include "GeneralTree.h"
 
 using namespace std;
+
+template<class T> //Converts string to to any type (int, double.. in this case)
+T converter(string input) {
+	stringstream ss(input);
+	T num;
+	ss >> num;
+	return num;
+}
 
 int split(const string &txt, vector<string> &strs, char ch) {
     unsigned int pos = txt.find( ch );
@@ -38,7 +47,7 @@ void readFile(string filename) {
 			
 			split(line, strvec, ' ');
 			
-			tree.insert(tree.root, strvec[0], strvec[1]);
+			tree.insert(tree.root, strvec[0], strvec[1], converter<int>(strvec[2]));
 
 		}
 		tree.print_in_trav(tree.root);

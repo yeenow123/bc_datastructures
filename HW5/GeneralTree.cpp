@@ -5,7 +5,7 @@ GeneralTree::GeneralTree() {
 	root = NULL;
 }
 
-void GeneralTree::insert(node * q, string name, string relation_name) {
+void GeneralTree::insert(node * q, string name, string relation_name, int sons) {
 	node * p;
 	node * r; //Node to add the tree
 	bool found = false;	
@@ -13,6 +13,7 @@ void GeneralTree::insert(node * q, string name, string relation_name) {
 	if (root == NULL) {
 		q = new node;
 		q->name = name;
+		q->sons = sons;
 		q->visited = false;
 		q->first = NULL;
 		q->next = NULL;
@@ -23,6 +24,7 @@ void GeneralTree::insert(node * q, string name, string relation_name) {
 		
 		r = new node;
 		r->name = name;
+		r->sons = sons;
 		r->visited = false;
 		r->first = NULL;
 		r->next = NULL;

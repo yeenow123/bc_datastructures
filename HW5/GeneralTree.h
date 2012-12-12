@@ -18,7 +18,7 @@ public:
 	node * root;
 
 	GeneralTree();
-	void insert(node *, string, string);
+	void insert(node *, string, string, int);
 	void print_in_trav(node *);
 	void father_p(string);
 

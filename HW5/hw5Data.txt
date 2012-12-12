@@ -1,9 +1,9 @@
-Jones A
-Bob Jones
-Dan Jones
-Brian Jones
-Richard Bob
-Jake Bob
-Michael Brian
-Bill Jake
-Deville Michael
+Jones A 3
+Bob Jones 2
+Dan Jones 0
+Brian Jones 1
+Richard Bob 0
+Jake Bob 1
+Michael Brian 1
+Bill Jake 0
+Deville Michael 0
