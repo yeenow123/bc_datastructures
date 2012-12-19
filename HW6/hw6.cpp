@@ -250,45 +250,45 @@ int main() {
 	num = sizeof(a) / sizeof(int);
 	readIn(a, num);
 
-	// cout << "Here is a group of 10 random numbers" << endl;
-	// num = 10;
-	// int * b = randomarr(num);
-	// readIn(b, num);
+	cout << "Here is a group of 10 random numbers" << endl;
+	num = 10;
+	int * b = randomarr(num);
+	readIn(b, num);
 
-	// cout << "Here is a group of 10 reverse numbers" << endl;
-	// int c[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-	// num = sizeof(c) / sizeof(int);
-	// readIn(c, num);
+	cout << "Here is a group of 10 reverse numbers" << endl;
+	int c[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+	num = sizeof(c) / sizeof(int);
+	readIn(c, num);
 
-	// cout << "Here is a group of 50 almost sorted numbers" << endl;
-	// num = 50;
-	// int * d = almostarr(num);
-	// readIn(d, num);	
+	cout << "Here is a group of 50 almost sorted numbers" << endl;
+	num = 50;
+	int * d = almostarr(num);
+	readIn(d, num);	
 
-	// cout << "Here is a group of 50 random numbers" << endl;
-	// num = 50;
-	// int * e = randomarr(num);
-	// readIn(e, num);	
+	cout << "Here is a group of 50 random numbers" << endl;
+	num = 50;
+	int * e = randomarr(num);
+	readIn(e, num);	
 
-	// cout << "Here is a group of 50 reverse numbers" << endl;
-	// num = 50;
-	// int * f = reversearr(num);
-	// readIn(f, num);
+	cout << "Here is a group of 50 reverse numbers" << endl;
+	num = 50;
+	int * f = reversearr(num);
+	readIn(f, num);
 
-	// cout << "Here is a group of 50 almost sorted numbers" << endl;
-	// num = 100;
-	// int * g = almostarr(num);
-	// readIn(g, num);	
+	cout << "Here is a group of 50 almost sorted numbers" << endl;
+	num = 100;
+	int * g = almostarr(num);
+	readIn(g, num);	
 
-	// cout << "Here is a group of 100 random numbers" << endl;
-	// num = 100;
-	// int * h = randomarr(num);
-	// readIn(h, num);	
+	cout << "Here is a group of 100 random numbers" << endl;
+	num = 100;
+	int * h = randomarr(num);
+	readIn(h, num);	
 	
-	// cout << "Here is a group of 100 reverse numbers" << endl;
-	// num = 100;
-	// int * i = reversearr(num);
-	// readIn(i, num);
+	cout << "Here is a group of 100 reverse numbers" << endl;
+	num = 100;
+	int * i = reversearr(num);
+	readIn(i, num);
 
 
 }
